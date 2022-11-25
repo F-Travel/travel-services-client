@@ -5,7 +5,7 @@ import {AiFillStar} from "react-icons/ai"
 
 const Feedback = (props) => {
   return (
-    <div className={"dskkjskajsakjewa"} style={{width: "100%", marginTop: 20, padding: "0 40px"}}>
+    <div className={"dskkjskajsakjew"} style={{width: "100%", marginTop: 20, padding: "0 40px"}}>
         <div className={"djskdjkasjklwawa"} style={{fontSize: 24, fontWeight: 600, marginBottom: 20}}>
             Đánh giá của khách
         </div>

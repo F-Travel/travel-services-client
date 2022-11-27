@@ -1,1 +1,1 @@
-export const SERVER_URL= "https://f-travel.azurewebsites.net​"
+export const SERVER_URL= "http://localhost:8080"

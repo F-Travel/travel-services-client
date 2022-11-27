@@ -1,28 +1,30 @@
 import React, { useState } from 'react'
 import GoogleLogin from 'react-google-login'
+import { useNavigate } from 'react-router-dom'
+import signup from '../../api/auth/user/signup'
+import Background from '../Background/Background'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
-import BannerLoginSignup from '../Common/BannerLoginSignup'
-import BannerNameSite from '../Common/BannerNameSite'
 import InputTemplate from '../Common/InputTemplate'
 import "./Signup.sass"
 
 const Signup = () => {
   return (
     <div className={"signup-main-page"}>
-        <BannerNameSite />
-        <BannerLoginSignup type={"Đăng ký"} />
         <MainSignup />
     </div>
   )
 }
 
 const MainSignup= (props)=> {
+    const navigate= useNavigate()
     const [name, setName]= useState(()=> "")
     const [email, setEmail]= useState(()=> "")
     const [password, setPassword]= useState(()=> "")
     const [cpassword, setCPassword]= useState(()=> "")
+    const [isManage, setIsManage]= useState(false)
+    const [data, setData]= useState()
     const responseGoogle = (response) => {
-        console.log(response);
+        setData(response);
     }
     
     return (
@@ -35,7 +37,7 @@ const MainSignup= (props)=> {
                     <InputTemplate type={"text"} onChange={(e)=> setName(e.target.value)} value={name} placeholder={"Name"} className={"inp-tml-name"}  />
                 </div>
                 <div className={"wrap-input-auth-page"}>
-                    <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Email hoặc sdt"} className={"inp-tml-email"}  />
+                    <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Nhận tên tài khoản"} className={"inp-tml-email"}  />
                 </div>
                 <div className={"wrap-input-auth-page"}>
                     <InputTemplate type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
@@ -43,8 +45,13 @@ const MainSignup= (props)=> {
                 <div className={"wrap-input-auth-page"}>
                     <InputTemplate type={"password"} onChange={(e)=> setCPassword(e.target.value)} value={cpassword} placeholder={"Nhập lại mật khẩu"} className={"inp-tml-cpassword"}  />
                 </div>
+                <div style={{justifyContent: "flex-start", width: "90%", maxWidth: 708, display: "flex", alignItems: "center", gap: 10}}>
+                    <input onChange={()=> setIsManage(prev=> !prev)} value={isManage} checked={isManage} type="checkbox" className={"fgjklsfjkldjskdas"} style={{width: 18, height: 18}} />
+                    <span>Bạn là quản lí khách sạn</span>
+                </div>
+                <br />
                 <div className={"wrap-input-auth-page"}>
-                    <ButtonTemplate className={"btn-tml-signup"} disable={false} onClick={()=> console.log("Hello World") }>Đăng ký</ButtonTemplate>
+                    <ButtonTemplate className={"btn-tml-signup"} disable={false} onClick={()=> signup(name, email,password, setData, navigate) }>Đăng ký</ButtonTemplate>
                 </div>
                 <div className={"toggle-to-login"}>
                     Hoặc tiếp tục với
@@ -55,10 +62,13 @@ const MainSignup= (props)=> {
                         clientId="795778883777-ui60ejuabu59dq1hg7pnk32lplccs1g6.apps.googleusercontent.com"
                         buttonText="Tiếp tục với google"
                         onSuccess={responseGoogle}
+                        onFailure={()=> console.log("error")}
+                        cookiePolicy={'single_host_origin'}
                     />
                     </div>
                 </div>
             </div>
+            <Background />
         </div>
     )
 }

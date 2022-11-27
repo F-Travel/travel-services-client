@@ -25,19 +25,20 @@
 }
 
 .container-range-slide .slider__track {
-  background-color: #ced4da;
+  background-color: #fff;
   width: 100%;
   z-index: 1;
 }
 
 .container-range-slide .slider__range {
-  background-color: #9fe5e1;
+  background-color: #2e89ff;
   z-index: 2;
 }
 
 .container-range-slide .slider__left-value,
 .container-range-slide .slider__right-value {
-  color: #000;
+  color: #fff;
+  font-weight: 600;
   font-size: 12px;
   margin-top: 20px;
 }

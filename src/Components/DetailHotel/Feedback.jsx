@@ -5,6 +5,7 @@ import {AiFillStar} from "react-icons/ai"
 
 const Feedback = (props) => {
   return (
+<<<<<<< HEAD
     <div className={"dskkjskajsakjewa"} style={{width: "100%", marginTop: 20, padding: "10px 40px"}}>
         <div className={"dfsdjdkljksjdksadjsa"} style={{width: "100%", background: "#fff", borderRadius: 5, padding: 5}}>
             <div className={"djskdjkasjklwawa"} style={{fontSize: 24, fontWeight: 600, marginBottom: 20}}>
@@ -43,6 +44,59 @@ const Feedback = (props) => {
                     }
                 </Swiper>
             </div>
+=======
+    <div className={"dskkjskajsakjew"} style={{width: "100%", marginTop: 20, padding: "0 40px"}}>
+        <div className={"djskdjkasjklwawa"} style={{fontSize: 24, fontWeight: 600, marginBottom: 20}}>
+            Đánh giá của khách
+        </div>
+        <div className={"djkajkajkassa"} style={{width: "100%"}}>
+            <Swiper
+                modules={[Navigation]}
+                className="list-nearly-place-suggest"
+                navigation={true}
+                style={{width: "100%", height: "100%"}}
+                breakpoints={{
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 30
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                },
+                500: {
+                    slidesPerView: 2,
+                    spaceBetween: 10
+                },
+                400: {
+                    slidesPerView: 1,
+                    spaceBetween: 0
+                }
+                }}
+            >
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <FeedbackComponent />
+                </SwiperSlide>
+            </Swiper>
+>>>>>>> 221a3941d09751ea86fbf319573b0ea0747d4fb6
         </div>
     </div>
   )

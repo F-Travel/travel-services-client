@@ -43,19 +43,19 @@ const Tab2= (props)=> {
           Thông tin chi tiết đặt phòng
         </div>
         <div className={"jdsijhiorjuhseas"} style={{width: "100%", padding: 10}}>
-          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16}}>
+          <div className={"djlhjflksjdasdsaa"} style={{marginBottom: 16, fontSize: 16}}>
             Ngày vào: 30/10/2022
           </div>
-          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
+          <div className={"djlhjflksjdasdsaa"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
             Ngày ra: 31/10/2022
           </div>
-          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
+          <div className={"djlhjflksjdasdsaa"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
             Tổng thời gian lưu trữ: <span className={"dfjhkdjskljdasas "} style={{fontSize: 18}}>1 đêm</span>
           </div>
-          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
+          <div className={"djlhjflksjdasdsaa"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
             Phòng đã chọn: <span className={"dfjhkdjskljdasas "} style={{fontSize: 18, fontWeight: 600}}>Phòng cao cấp</span>
           </div>
-          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16}}>
+          <div className={"djlhjflksjdasdsaa"} style={{marginBottom: 16, fontSize: 16}}>
             Tổng giá: 1,968,946 VND
           </div>
         </div>
@@ -64,18 +64,18 @@ const Tab2= (props)=> {
       <div className={"djslksajkjfklasa"} style={{width: "calc(100% - 400px)"}}>
         <div className={"dfjkahduashajksas"} style={{width: "100%"}}>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
-            <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Họ và tên: </div>
+            <div className={"sjkldasjkdjaww"} style={{fontSize: 18, fontWeight: 600}}>Họ và tên: </div>
             <input type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
           </div>
-          <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
+          <div className={"fjklasjdkasjksja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Nhập số điện thoại liên hệ: </div>
             <input type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
           </div>
-          <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
+          <div className={"fjklasjdkasjksja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Nhập địa chỉ email: </div>
             <input type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
           </div>
-          <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32}}>
+          <div className={"fjklasjdkasjksja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Yêu cầu khác: </div>
             <textarea type="text" className={"sdjskldjakjask"} rows={40} style={{width: 300, height: 200, background: "#d9d9d9", padding: 10, fontSize: 16, resize: "none"}} />
           </div>

@@ -78,6 +78,31 @@ const MainDetail= (props)=> {
                         <div className={"ele-list-ab-room-1-1"}>Chi phí khác</div>
                         <div className={"ele-list-ab-room-1-2"}>0đ</div>
                     </div>
+                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                        <div className={"ele-list-ab-room-1-1"}>Dịch vụ bổ sung</div>
+                        <div className={"ele-list-ab-room-1-2"}>0</div>
+                    </div>
+                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                        <div className={"ele-list-ab-room-1-1"}>Chi phí khác</div>
+                        <div className={"ele-list-ab-room-1-2"}>0đ</div>
+                    </div>
+                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                        <div className={"ele-list-ab-room-1-1"}>Dịch vụ bổ sung</div>
+                        <div className={"ele-list-ab-room-1-2"}>0</div>
+                    </div>
+                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                        <div className={"ele-list-ab-room-1-1"}>Chi phí khác</div>
+                        <div className={"ele-list-ab-room-1-2"}>0đ</div>
+                    </div>
+
+                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                        <div className={"ele-list-ab-room-1-1"}>Dịch vụ bổ sung</div>
+                        <div className={"ele-list-ab-room-1-2"}>0</div>
+                    </div>
+                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                        <div className={"ele-list-ab-room-1-1"}>Chi phí khác</div>
+                        <div className={"ele-list-ab-room-1-2"}>0đ</div>
+                    </div>
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Tổng</div>
                         <div className={"ele-list-ab-room-1-2"}>{_.sumBy(props?.data?.data?.data, function(e) {return e.amount})} VND</div>

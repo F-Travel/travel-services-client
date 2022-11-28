@@ -59,8 +59,8 @@ const Navigation = (props) => {
   };
 const Main= (props)=> {
     return (
-        <div className={"alksjklrjwkeawsa"} style={{flex: "1 1 0", padding: 20, background: "#e4f2fd", display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <div className={"djkcskljcfcaxsa"} style={{width: "100%", borderRadius: 10, background: "#fff", minHeight: "100vh"}}>
+        <div className={"alksjklrjwkeaws"} style={{flex: "1 1 0", padding: 20, background: "#e4f2fd", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <div className={"djkcskljcfcaxs"} style={{width: "100%", borderRadius: 10, background: "#fff", minHeight: "100vh"}}>
                 <Routes>
                     <Route path={"/"} element={<Navigate to={"/manage/hotel/general"} />} />
                     <Route path={"/hotel/general"} element={<ListHotel />} />
@@ -154,11 +154,11 @@ const MainElementEvent= (props)=> {
     return (
         <table className={"jskldjakdjskdalks"} style={{width: "100%", padding: "0 30px", borderSpacing: 10, borderCollapse: "separate"}}>
             <thead className={"jskldjklajsakslas"} style={{width: "100%",paddingBottom: 10, borderBottom: "1px solid #000", paddingLeft: 20, paddingRight: 20}}>
-                <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Địa điểm</th>
-                <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Tên sự kiện</th>
-                <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Nội dung</th>
-                <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Hình ảnh</th>
-                <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Hành động</th>
+                <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Địa điểm</th>
+                <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Tên sự kiện</th>
+                <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Nội dung</th>
+                <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Hình ảnh</th>
+                <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Hành động</th>
             </thead>
             <tbody style={{width: "100%"}}> 
                 <tr className={"djskldjaksjakass"} style={{width: "100%", padding: "10px 20px", marginBottom: 16, height: "max-content"}}>
@@ -231,9 +231,9 @@ const MainListCommentReport= (props)=> {
             {
                 <thead className={"jskldjklajsakslas"} style={{width: "100%", paddingBottom: 10, borderBottom: "1px solid #000", paddingLeft: 20, paddingRight: 20}}>
                     <tr>
-                        <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Tên người dùng</th>
-                        <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Comment bị report</th>
-                        <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Hành động</th>
+                        <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Tên người dùng</th>
+                        <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Comment bị report</th>
+                        <th className={"djlasjkjddaks"} style={{fontSize: 18, fontWeight: 600}}>Hành động</th>
                     </tr>
             </thead>
             }

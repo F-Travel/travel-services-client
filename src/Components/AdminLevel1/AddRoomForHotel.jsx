@@ -212,7 +212,7 @@ export const TitleItem = (props) => {
 const BtnCreate = (props) => {
   return (
     <div
-      className={"fkaskldkldklska"}
+      className={"fkaskldkldklsk"}
       style={{
         width: "100%",
         display: "flex",
@@ -222,7 +222,7 @@ const BtnCreate = (props) => {
       }}
     >
       <button
-        className={"mdlkdskldklkaa"}
+        className={"mdlkdskldklka"}
         style={{
           padding: "10px 30px",
           background: "#2e89ff",
@@ -267,10 +267,10 @@ const Image= (props)=> {
     console.log(a);
   };
   return (
-    <div className={"fskjakejakwjaklawwa"} style={{ width: "100%" }}>
+    <div className={"fskjakejakwjaklaww"} style={{ width: "100%" }}>
       <TitleItem title={"Hình ảnh *"} />
       <div
-        className={"fjajkjsklajraeweaa"}
+        className={"fjajkjsklajraewea"}
         style={{
           width: "100%",
           padding: 20,

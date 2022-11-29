@@ -15,6 +15,15 @@ const ListBooking = (props) => {
                 Đã đặt
             </NavLink>
         </div>
+        <div className={"list-booking"} style={{width: "100%"}}>
+        <div className={"klsdhjklsjasaas"} style={{display: "flex", alignItems: "center", gap: 50, padding: "0 40px", margin: "20px 0"}}>
+            <NavLink to={"/booking/order/pending"} style={{textDecoration: "none", color: "#000", fontSize: 20, fontWeight: 600}} className={({isActive})=> isActive ? "sadkljaskjsassa skjldsjdkrujiwoeras": "akjhskeaiorjwes jsdjaslkdjkldswe" }>
+                Chờ duyệt 
+            </NavLink>
+            <NavLink to={"/booking/order/success"} style={{textDecoration: "none", color: "#000", fontSize: 20, fontWeight: 600}} className={({isActive})=> isActive ? "sadkljaskjsassa skjldsjdkrujiwoeras": "akjhskeaiorjwes jsdjaslkdjkldswe" }>
+                Đã đặt
+            </NavLink>
+        </div>
         <Routes>
             <Route path={"/"} element={<IndexComponent />} />
             <Route path={"/pending"} element={<PendingBooking />} />

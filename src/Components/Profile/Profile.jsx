@@ -23,6 +23,11 @@ const Profile = (props) => {
                     <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
                         <InputTemplate className={"wrap-inp-info-user-i"} />
                     </div>
+                    <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
+                    <Title title={"Giới tính"} />
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
+                        <InputTemplate className={"wrap-inp-info-user-i"} />
+                    </div>
                 </div>
                 <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
                     <Title title={"Số điện thoại"} />

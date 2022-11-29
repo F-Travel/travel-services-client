@@ -54,9 +54,11 @@ const Profile = (props) => {
                     <div style={{display: "flex", alignItems: "center", marginBottom: 8, justifyContent: "center", fontWeight: 600}}>
                         {user?.full_name || "Unset"}
                     </div>
+
                     <br />
                     <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
                         <HiLocationMarker />&nbsp;&nbsp;&nbsp;{user?.address || "Unset"}
+
                     </div>
                     <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
                         <AiOutlinePhone />&nbsp;&nbsp;&nbsp;{user?.phone || "Unset"}

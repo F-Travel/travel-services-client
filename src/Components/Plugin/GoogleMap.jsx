@@ -1,5 +1,5 @@
 import GoogleMapReact from 'google-map-react';
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const   AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const GoogleMapPlugin = ()=> {
     const defaultProps = {

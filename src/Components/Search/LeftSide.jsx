@@ -2,14 +2,15 @@ import React, {useState } from 'react'
 import InputTemplate from '../Common/InputTemplate'
 import MultiRangeSlider from './RangeSlider'
 import "./LeftSide.sass"
-import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
+// import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import { useSearchParams } from 'react-router-dom'
 import ReactOutsideClickHandler from 'react-outside-click-handler'
 import { BiBed } from 'react-icons/bi'
 import SuggestSearch from '../SuggestSearch/SuggestSearch'
-import moment from 'moment'
-import { BsCalendar3 } from 'react-icons/bs'
-import DatePickerPlugin from '../Plugin/DatePicker'
+import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
+// import moment from 'moment'
+// import { BsCalendar3 } from 'react-icons/bs'
+// import DatePickerPlugin from '../Plugin/DatePicker'
 
 const LeftSide = (props) => {
   return (
@@ -28,16 +29,16 @@ const MainLeftSide= (props)=> {
     const [searchParams ]= useSearchParams()
     const [destination, setDestination]= useState(()=> searchParams.get("spec"))
     const [openDestination, setOpenDestination]= useState(()=> false)
-    const [openTime, setOpenTime]= useState(()=> false)
-    const [startDate, setStartDate]= useState(()=> moment(searchParams.get("ci"), "DD-MM-YYYY").toDate())
-    const [endDate, setEndDate]= useState(()=> moment(searchParams.get("co"), "DD-MM-YYYY").toDate())
-    const [guest, setGuest]= useState(()=> ({
-        adult: searchParams.get("gs").split(".")[0],
-        children: searchParams.get("gs").split(".")[1],
-        room: searchParams.get("r")
-    }))
+    // const [openTime, setOpenTime]= useState(()=> false)
+    // const [startDate, setStartDate]= useState(()=> moment(searchParams.get("ci"), "DD-MM-YYYY").toDate())
+    // const [endDate, setEndDate]= useState(()=> moment(searchParams.get("co"), "DD-MM-YYYY").toDate())
+    // const [guest, setGuest]= useState(()=> ({
+    //     adult: searchParams.get("gs").split(".")[0],
+    //     children: searchParams.get("gs").split(".")[1],
+    //     room: searchParams.get("r")
+    // }))
     return (
-        <div className={"main-left-side-search-result"} style={{padding: 10, background: "#d9d9d9", width: "100%", marginBottom: 50}}>
+        <div className={"main-left-side-search-result"} style={{padding: 10, background: "#febb02", width: "100%", marginBottom: 50, borderRadius: 5}}>
             <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                 <Title title={"Điểm đến"} />
                 <ReactOutsideClickHandler onOutsideClick={()=> setOpenDestination(()=> false)}>
@@ -58,7 +59,7 @@ const MainLeftSide= (props)=> {
                 </ReactOutsideClickHandler>
             </div>
             {/*  */}
-            <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
+            {/* <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                 <Title title={"Ngày nhận - trả phòng"} />
                 <ReactOutsideClickHandler onOutsideClick={()=> setOpenTime(()=> false)}>
                     <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
@@ -75,39 +76,39 @@ const MainLeftSide= (props)=> {
                         </div>
                     </div>
                 </ReactOutsideClickHandler>
-            </div>
+            </div> */}
             {/*  */}
             <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                 <Title title={"Lựa chọn"} />
-                <MultiRangeSlider onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} min={0} max={1000} />
+                <MultiRangeSlider onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} min={0} max={5000000} />
             </div>
-            <div className={"guest-adult-c"} style={{marginBottom: 16}}>
+            {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                 <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                     <span className={"w-guest-left-side-sp"}>Người lớn</span>
                     <div className={"w-guest-l-inp"} style={{width: 50, height: 18, background: "#fff"}}>
                         <InputTemplate style={{display: "flex", justifyContent: 'center', alignItems: "center", textAlign: "center"}} value={guest.adult} type={"number"} onChange={(e)=> setGuest(prev=> ({...prev, adult: parseInt(e.target.value)}))} className={"inp-wrap-guest-option-left-side-search-result"} />
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/*  */}
-            <div className={"guest-adult-c"} style={{marginBottom: 16}}>
+            {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                 <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                     <span className={"w-guest-left-side-sp"}>Trẻ em</span>
                     <div className={"w-guest-l-inp"} style={{width: 50, height: 18, background: "#fff"}}>
                         <InputTemplate style={{display: "flex", justifyContent: 'center', alignItems: "center", textAlign: "center"}} value={guest.children} type={"number"} onChange={(e)=> setGuest(prev=> ({...prev, children: parseInt(e.target.value)}))} className={"inp-wrap-guest-option-left-side-search-result"} />
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/*  */}
-            <div className={"guest-adult-c"} style={{marginBottom: 16}}>
+            {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                 <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                     <span className={"w-guest-left-side-sp"}>Phòng</span>
                     <div className={"w-guest-l-inp"} style={{width: 50, height: 18, background: "#fff"}}>
                         <InputTemplate style={{display: "flex", justifyContent: 'center', alignItems: "center", textAlign: "center"}} value={guest.room} type={"number"} onChange={(e)=> setGuest(prev=> ({...prev, room: parseInt(e.target.value)}))} className={"inp-wrap-guest-option-left-side-search-result"} />
                     </div>
                 </div>
-            </div>
-            <div className={"wrap-btn-search-booking-again"} style={{width: "100%", height: 40, marginTop: 20}}>
+            </div> */}
+            <div className={"wrap-btn-search-booking-again"} style={{width: "100%", height: 40, marginTop: 20, background: "#2e89ff", color:"#fff"}}>
                 <ButtonTemplate disable={false} className={"c-wrap-btn-search-booking-again"}>Tìm kiếm</ButtonTemplate>
             </div>
         </div>
@@ -116,7 +117,7 @@ const MainLeftSide= (props)=> {
 
 const Title= (props)=> {
     return (
-        <div className={"title-main-left-side-search-result"} style={{fontSize: 14, marginBottom: 16}}>
+        <div className={"title-main-left-side-search-result"} style={{fontSize: 16, marginBottom: 16, color: "#fff", fontWeight: 600}}>
             {props.title}
         </div>
     )
@@ -124,13 +125,13 @@ const Title= (props)=> {
 
 const Rating= (props)=> {
     return (
-        <div className={"rating-booking-hotel"} style={{width: "100%", padding: 10, background: "#d9d9d9"}}>
+        <div className={"rating-booking-hotel"} style={{width: "100%", padding: 10, background: "#febb02", borderRadius: 5}}>
             <Title title={"Xếp hạng theo sao"} />
             <div className={"rating-booking-hotel-star-1 rating-booking-hotel-star"} style={{display: "flex", alignItems: "center", gap: 14, marginBottom: 16}}>
                 <div className={"wrap-inp-rating-booking-hotel-star-1"} style={{width: 24, height: 24}}>
                     <InputTemplate onChange={()=> {}} value={1} type={"checkbox"} className={"inp-rating-booking-hotel-star-1"} />
                 </div>
-                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16}}>
+                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16, color: "#fff"}}>
                     1 sao
                 </div>
             </div>
@@ -139,7 +140,7 @@ const Rating= (props)=> {
                 <div className={"wrap-inp-rating-booking-hotel-star-1"} style={{width: 24, height: 24}}>
                     <InputTemplate onChange={()=> {}} value={1} type={"checkbox"} className={"inp-rating-booking-hotel-star-1"} />
                 </div>
-                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16}}>
+                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16, color: "#fff"}}>
                     2 sao
                 </div>
             </div>
@@ -148,7 +149,7 @@ const Rating= (props)=> {
                 <div className={"wrap-inp-rating-booking-hotel-star-1"} style={{width: 24, height: 24}}>
                     <InputTemplate onChange={()=> {}} value={1} type={"checkbox"} className={"inp-rating-booking-hotel-star-1"} />
                 </div>
-                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16}}>
+                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16, color: "#fff"}}>
                     3 sao
                 </div>
             </div>
@@ -157,7 +158,7 @@ const Rating= (props)=> {
                 <div className={"wrap-inp-rating-booking-hotel-star-1"} style={{width: 24, height: 24}}>
                     <InputTemplate onChange={()=> {}} value={1} type={"checkbox"} className={"inp-rating-booking-hotel-star-1"} />
                 </div>
-                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16}}>
+                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16, color: "#fff"}}>
                     4 sao
                 </div>
             </div>
@@ -166,7 +167,7 @@ const Rating= (props)=> {
                 <div className={"wrap-inp-rating-booking-hotel-star-1"} style={{width: 24, height: 24}}>
                     <InputTemplate onChange={()=> {}} value={1} type={"checkbox"} className={"inp-rating-booking-hotel-star-1"} />
                 </div>
-                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16}}>
+                <div className={"rating-booking-hotel-star-d"} style={{fontSize: 16, color: "#fff"}}>
                     5 sao
                 </div>
             </div>

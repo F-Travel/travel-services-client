@@ -1,5 +1,7 @@
-import React from 'react'
-import { BannerHome} from "../Home/Home"
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import search_hotel from '../../api/search/search_hotel'
 import LeftSide from './LeftSide'
 import RightSide from './RightSide'
 import "./Search.sass"
@@ -7,17 +9,21 @@ import "./Search.sass"
 const Search = (props) => {
   return (
     <div className={"search-result"}>
-      <BannerHome />
       <MainSearch />
     </div>
   )
 }
 
 const MainSearch= (props)=> {
+  const [result, setResult]= useState(()=> [])
+  const [searchParams] = useSearchParams()
+   useEffect(()=> {
+      search_hotel(searchParams.get("spec"), setResult)
+   }, [searchParams])
     return (
       <div className={"main-search-result"} style={{width: "100%", display: "flex", justifyContent: "space-between", padding: 20, gap: 30}}>
         <LeftSide />
-        <RightSide />
+        <RightSide result={result} />
       </div>
     )
 }

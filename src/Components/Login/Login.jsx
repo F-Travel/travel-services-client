@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
-import BannerLoginSignup from '../Common/BannerLoginSignup'
-import BannerNameSite from '../Common/BannerNameSite'
+//import BannerLoginSignup from '../Common/BannerLoginSignup'
+//import BannerNameSite from '../Common/BannerNameSite'
 import InputTemplate from '../Common/InputTemplate'
 import "./Login.sass"
 import { Link } from 'react-router-dom'
 import { GoogleLogin } from 'react-google-login';
+import Background from '../Background/Background'
+import login from '../../api/auth/user/login'
 
 const Login = () => {
   return (
     <div className={"login-main-page"}>
-      <BannerNameSite />
-      <BannerLoginSignup type={"Đăng nhập"} />
       <MainLogin />
     </div>
   )
@@ -20,6 +20,7 @@ const Login = () => {
 const MainLogin= ()=> {
   const [email, setEmail]= useState(()=> "")
   const [password, setPassword]= useState(()=> "")
+  const [message, setMessgae]= useState()
   const responseGoogle = (response) => {
     console.log(response);
   }
@@ -31,13 +32,16 @@ const MainLogin= ()=> {
         Đăng nhập
       </div>
       <div className={"wrap-input-auth-page"}>
-        <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Email hoặc sdt"} className={"inp-tml-email"}  />
+        <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Nhập tên tài khoản"} className={"inp-tml-email"}  />
       </div>
       <div className={"wrap-input-auth-page"}>
         <InputTemplate type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
       </div>
+      {
+        message && <div className={"fksdklkdsasaas"} style={{margin: "8px 0"}}>{message}</div>
+      }
       <div className={"wrap-input-auth-page"}>
-        <ButtonTemplate className={"btn-tml-login"} disable={false} onClick={()=> console.log("Hello World") }>Đăng nhập</ButtonTemplate>
+        <ButtonTemplate className={"btn-tml-login"} disable={false} onClick={()=> login(email, password, setMessgae) }>Đăng nhập</ButtonTemplate>
       </div>
       <div style={{width: "90%", maxWidth: 708, display: "flex", justifyContent: 'space-between',  alignItems:" center"}}>
         <span>Bạn không có tài khoản? <Link to={"/signup"} style={{fontWeight: 600, color: "#2e89ff",  textDecoration: "none"}}>Đăng ký tại đây</Link></span>
@@ -56,6 +60,7 @@ const MainLogin= ()=> {
         </div>
       </div>
       </div>
+      <Background />
     </div>
   )
 }

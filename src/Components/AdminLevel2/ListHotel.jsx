@@ -10,7 +10,7 @@ const ListHotel = (props) => {
 
 export const Title= (props)=> {
     return (
-        <div className={"aksdkjasksalasas"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #000", marginBottom: 16}}>
+        <div className={"aksdkjasksalasase"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #000", marginBottom: 16}}>
             <div className={"djkdjksjasksjasa"} style={{fontSize: 20, fontWeight: 600}}>
                 {props.title}
             </div>
@@ -21,6 +21,18 @@ export const Title= (props)=> {
                         Thêm mới khách sạn
                     </button>
                 </div>
+
+<div className={"aksdkjasksalasase"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #000", marginBottom: 16}}>
+<div className={"djkdjksjasksjasa"} style={{fontSize: 20, fontWeight: 600}}>
+    {props.title}
+</div>
+{
+    props.is_add_new_hotel=== true &&
+    <div className={"snkdljkasksalsalas"}>
+        <button style={{padding: 10, outline: "none", border: "none", cursor: "pointer", background: "#d9d9d9"}}>
+            Thêm mới khách sạn
+        </button>
+    </div>
             }
         </div>
     )

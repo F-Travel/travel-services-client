@@ -1,28 +1,39 @@
 import GoogleMapReact from 'google-map-react';
-const   AnyReactComponent = ({ text }) => <div>{text}</div>;
+import isNumber from "is-number"
 
-const GoogleMapPlugin = ()=> {
-    const defaultProps = {
-        center: {
-          lat: 21.0313,
-          lng: 105.8516
-        },
-        zoom: 15
-    };
-    return (
-        <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDWTx7bREpM5B6JKdbzOvMW-RRlhkukmVE" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-        yesIWantToUseGoogleMapApiInternals
-      >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        />
-      </GoogleMapReact>
-    )
+const AnyReactComponent = ({ text }) => <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+  <img alt={"open"} src={"https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png"} style={{width: 36, height: 36}} />
+</div>;
+
+const GoogleMapPlugin = (props)=> {
+    if(isNumber(props?.data?.latitude)) {
+      function onClick(obj){ console.log(obj.x, obj.y, obj.lat, obj.lng, obj.event);}
+      const defaultProps = {
+          center: {
+            lat: parseFloat(props?.data?.latitude),
+            lng: parseFloat(props?.data?.longitude)
+          },
+          zoom: 15
+      };
+      return (
+          <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyCKbIS2qC0sJJuol4rcPZFnNiJsRfzK7j0" }}
+          defaultCenter={defaultProps.center}
+          defaultZoom={defaultProps.zoom}
+          yesIWantToUseGoogleMapApiInternals
+          onClick={onClick}
+        >
+          <AnyReactComponent
+            lat={parseFloat(props?.data?.latitude)}
+            lng={parseFloat(props?.data?.longitude)}
+            text="My Marker"
+          />
+        </GoogleMapReact>
+      )
+    }
+    else {
+      return <div>Loading</div>
+    }
 }
 
 export default GoogleMapPlugin

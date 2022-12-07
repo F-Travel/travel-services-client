@@ -12,22 +12,51 @@ import { SearchSuggest } from "../Home/Home";
 import suggest_search from "../../api/search/suggest_search";
 import Fuse from "fuse.js"
 import Cookies from "js-cookie";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import detail_hotel from "../../api/hotel/detail_hotel";
+import Snackbar from "../Snackbar/Snackbar";
+import update_hotel from "../../api/manage/update_hotel";
+import approve_hotel from "../../api/admin/approve_hotel";
+// import delete_hotel from "../../api/admin/delete_hotel";
+import Popup from "./Popup";
+import delete_hotel_x from "../../api/manage/delete_hotel_x";
 
-const RegisterHotel = (props) => {
+export const RegisterHotel = (props) => {
+  // eslint-disable-next-line
+  const {idHotel}= useParams()
+  // eslint-disable-next-line
+  const [searchParams, setSearchParams]= useSearchParams()
+  const [data, setData]= useState()
+  useEffect(()=> {
+    if(props?.is_detail=== true ) {
+      detail_hotel(idHotel, setData)
+    }
+    if(props?.is_edit=== true) {
+      detail_hotel(searchParams.get("idHotel"), setData)
+    }
+  }, [props?.is_edit, searchParams, props?.is_detail, idHotel])
   return (
     <div
       className={"jsjakljsakjsakeawa"}
       style={{ width: "100%"}}
     >
-      <Title is_edit={props?.is_edit} title={props?.is_edit===true ? "Sửa khách sạn" : "Đăng ký khách sạn"} title1={props?.is_edit=== true ? "Sửa phòng" : "Đăng ký phòng"} />
-      <MainRegister />
+      {
+        !props?.is_detail=== true &&
+        <Title is_edit={props?.is_edit} title={props?.is_edit===true ? "Sửa khách sạn" : "Đăng ký khách sạn"} title1={props?.is_edit=== true ? "Sửa phòng" : "Đăng ký phòng"} />
+      }
+      <MainRegister is_detail={props?.is_detail} is_edit={props?.is_edit} data={data} />
     </div>
   );
 };
 
 const MainRegister = (props) => {
+  // eslint-disable-next-line
+  const [imgX, setImgX]= useState([])
+  // eslint-disable-next-line
   const [payload, setPayload]= useState()
   // 
+  const {idHotel}= useParams()
+  const [searchParams]= useSearchParams()
   const [hotelName, setHotelName]= useState()
   const [phoneNumber, setPhoneNumber]= useState()
   const [address, setAddress]= useState()
@@ -36,6 +65,7 @@ const MainRegister = (props) => {
   const [checkIn, setCheckIn]= useState()
   const [checkOut, setCheckOut]= useState()
   const [isPaymentCard, setIsPaymentCard]= useState()
+  // eslint-disable-next-line
   const [listImageFinal, setListImageFinal]= useState([])
 
   // 
@@ -44,16 +74,48 @@ const MainRegister = (props) => {
   const isChooseImage = listImage.length > 0 ? true : false;
   // const [openListCity, setOpenListCity]= useState(false)
   const [idCity, setIdCity]= useState()
-
+  const [loading, setLoading]= useState(false)
+  const navigate= useNavigate()
   const add_hotel_func= async ()=> {
     const list_img_final_unresolve= listImage?.map(item=> uploadImageClient(item.img, setListImageFinal))
     const result= await Promise.all(list_img_final_unresolve)
-    add_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, Cookies.get("uid"), convenient, setPayload)
+    const id_hotel= await add_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, Cookies.get("uid"), convenient, setPayload)
+    navigate("/manage/hotel/add/new/room?idHotel="+ id_hotel)
+  }
+  const update_hotel_func= async ()=> {
+    const list_img_final_unresolve= listImage?.map(item=> uploadImageClient(item.img, setListImageFinal))
+    const result= await Promise.all(list_img_final_unresolve)
+    const id_hotel= await update_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, convenient, searchParams.get("idHotel"), setPayload, setLoading)
+    return id_hotel
+  }
+  useEffect(()=> {
+    if(props?.is_edit=== true || props?.is_detail ) {
+      setHotelName(props?.data?.hotel_name)
+      setPhoneNumber(props?.data?.phone)
+      setAddress(props?.data?.address)
+      setDescription(props?.data?.description)
+      setCheckIn(props?.data?.check_in_time)
+      setCheckOut(props?.data?.check_out_time)
+      setIsPaymentCard(props?.data?.is_payment_card)
+      setImgX(prev=> ([props?.data?.image, props?.data?.image1, props?.data?.image2, props?.data?.image3, props?.data?.image4]))
+      setConvenient(props?.hotel_properties)
+    }
+  }, [props?.is_edit, props?.data, props?.is_detail, props?.hotel_properties])
+  // eslint-disable-next-line
+  const [y, setY]= useState()
+  // eslint-disable-next-line
+  const [loading2, setLoading2]= useState(false)
+  const approveHotel= ()=> {
+    approve_hotel(idHotel)
+  }
+  const rejectHotel= ()=> {
+    delete_hotel_x(idHotel, setY, setLoading2)
   }
   return (
-    <div
+    <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd"}}>
+      <div
       className={"djksjajerkjawwawa"}
-      style={{ width: "100%", padding: 10, background: "#d9d9d9" }}
+      style={{ width: "100%", padding: 10, background: "#fff"}}
     >
       <div
         className={"fjskdljskdfjeaaawa"}
@@ -68,7 +130,7 @@ const MainRegister = (props) => {
       >
         {/*  */}
         <div
-          className={"fjkjaklwjkrlawawaw"}
+          className={`fjkjaklwjkrlawawaw ${props?.is_detail=== true ? "sjdkdsjkdjkeawa" : "skldksdlskdlsd"}`}
           style={{
             flex: "1 1 0",
             minHeight: 250,
@@ -88,23 +150,25 @@ const MainRegister = (props) => {
             }}
           >
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
-              <TitleItem title={"Tên khách sạn *"} />
+              <TitleItem title={<span>Tên khách sạn <span style={{color: "red"}}>*</span></span>} />
               <InputTemplate
                 onChange={(e) => setHotelName(e.target.value)}
+                value={hotelName}
                 style={{
                   width: "100%",
                   height: 40,
                   padding: 10,
                   outlineColor: "#2e89ff",
                   background: "#fff",
-                  border: "none",
+                  border: "1px solid #e7e7e7",
                   borderRadius: 5,
                 }}
               />
             </div>
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
-              <TitleItem title={"Số điện thoại *"} />
+              <TitleItem title={<span>Số điện thoại <span style={{color: "red"}}>*</span></span>} />
               <InputTemplate
+                value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 style={{
                   width: "100%",
@@ -112,15 +176,17 @@ const MainRegister = (props) => {
                   padding: 10,
                   outlineColor: "#2e89ff",
                   background: "#fff",
-                  border: "none",
+                  border: "1px solid #e7e7e7",
                   borderRadius: 5,
+                  
                 }}
               />
             </div>
           </div>
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%" }}>
-            <TitleItem title={"Địa chỉ *"} />
+            <TitleItem title={<span>Địa chỉ <span style={{color: "red"}}>*</span></span>} />
             <InputTemplate
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
               style={{
                 width: "100%",
@@ -128,19 +194,25 @@ const MainRegister = (props) => {
                 padding: 10,
                 outlineColor: "#2e89ff",
                 background: "#fff",
-                border: "none",
+                border: "1px solid #e7e7e7",
                 borderRadius: 5,
               }}
             />
           </div>
-          <div className={"dsjaajwjalkwawwa"} style={{ width: "100%", position: "relative"}}>
-            <TitleItem title={"Chọn thành phố *"} />
-        
-           {<ChooseCity setIdCity={setIdCity} />}
-          </div>
+          <>
+          {
+            !props?.is_detail=== true &&
+            <div className={"dsjaajwjalkwawwa"} style={{ width: "100%", position: "relative"}}>
+              <TitleItem title={<span>Chọn thành phố <span style={{color: "red"}}>*</span></span>} />
+          
+            {<ChooseCity setIdCity={setIdCity} />}
+            </div>
+          }
+          </>
         </div>
         {/* intergrate map */}
-        <div
+        {
+          !props?.is_detail=== true && <div
           className={"fksedkawjrkjakwawwaw"}
           style={{ width: 250, height: 250 }}
         >
@@ -151,14 +223,16 @@ const MainRegister = (props) => {
             <GoogleMapPlugin />
           </div>
         </div>
+        }
       </div>
       {/*  */}
       <div
         className={"dsjaajwjalkwawwa"}
         style={{ width: "100%", marginBottom: 30 }}
       >
-        <TitleItem title={"Mô tả *"} />
+        <TitleItem title={<span>Mô tả <span style={{color: "red"}}>*</span></span>} />
         <textarea
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
           style={{
             width: "100%",
@@ -168,22 +242,25 @@ const MainRegister = (props) => {
             background: "#fff",
             fontSize: 16,
             resize: "none",
-            border: "none",
+            border: "1px solid #e7e7e7",
             borderRadius: 5
           }}
         />
       </div>
-      <Convenient setConvenient={setConvenient} convenient={convenient} />
+      <Convenient is_detail={props?.is_detail} setConvenient={setConvenient} convenient={convenient} />
       <br />
-      <SetRule checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
+      <SetRule is_detail={props?.is_detail} checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
       <br />
-      <ImageIllustation listImage={listImage}
+      <ImageIllustation approveHotel={approveHotel} rejectHotel={rejectHotel} imgX={imgX} is_detail={props?.is_detail} is_edit={props?.is_edit} listImage={listImage}
         setListImage={setListImage}
         result={result}
         setResult={setResult}
         isChooseImage={isChooseImage}
         add_hotel_func={add_hotel_func}
+        update_hotel_func={update_hotel_func}
       />
+      {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo "} description={"Cập nhật khách sạn thành công !"} />}
+    </div>
     </div>
   );
 };
@@ -196,18 +273,8 @@ const ChooseCity= (props)=> {
 
   const options = {
     isCaseSensitive: false,
-    // includeScore: false,
     shouldSort: true,
     includeMatches: false,
-    // findAllMatches: false,
-    // minMatchCharLength: 1,
-    // location: 0,
-    // threshold: 0.6,
-    // distance: 100,
-    // useExtendedSearch: false,
-    // ignoreLocation: false,
-    // ignoreFieldNorm: false,
-    // fieldNormWeight: 1,
     keys: [
       "city_name",
       "province"
@@ -223,7 +290,6 @@ const ChooseCity= (props)=> {
   }
   return (
     <SearchSuggest
-
       setOpenDestination={setOpenDestination}
       destination={destination}
       search_by_place={search_by_place}
@@ -256,10 +322,12 @@ const SetRule = (props) => {
         className={"fkajkawakwawaew"}
         style={{ width: "100%", padding: 20, background: "#fff",borderRadius: 5 }}
       >
-        <Label label={"Thời gian nhận phòng: "} component={<TimePicker onChange={props?.setCheckIn} value={props?.checkIn} />} />
-        <Label label={"Thời gian trả phòng: "} component={<TimePicker onChange={props?.setCheckOut} value={props?.checkOut} />} />
+        <Label is_detail={props?.is_detail} label={"Thời gian nhận phòng: "} value={props?.checkIn} component={<TimePicker onChange={props?.setCheckIn} value={props?.checkIn} />} />
+        <Label is_detail={props?.is_detail} label={"Thời gian trả phòng: "} value={props?.checkOut} component={<TimePicker onChange={props?.setCheckOut} value={props?.checkOut} />} />
         <Label
-          label={"Hủy đặt phòng / Trả trước"}
+          is_detail={props?.is_detail}
+          label={"Hủy đặt phòng / Trả trước: "}
+          value={props?.isPaymentCard=== true ? "Có": "Không"}
           component={<YesNoOptions setIsPaymentCard={props?.setIsPaymentCard} />}
         />
         {/* <Label label={"Trẻ em và giường"} />
@@ -279,10 +347,10 @@ export const Convenient= (props)=> {
           Tiện nghi và nội quy
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Máy lạnh"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Wc"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Chỗ để xe"} type_id={4} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Máy lạnh"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Wc"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Chỗ để xe"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -291,10 +359,9 @@ export const Convenient= (props)=> {
           Hướng nhìn
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Núi"} type_id={4} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Biển"} type_id={5} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-
-          <ComponentConvenient name={"Sông"} type_id={6} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Núi"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Biển"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Sông"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
 
         </div>
         <br />
@@ -304,8 +371,8 @@ export const Convenient= (props)=> {
           Phòng tắm
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Đồ vệ sinh cá nhân"} type_id={7} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Dép"} type_id={8} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Đồ vệ sinh cá nhân"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Dép"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -328,7 +395,9 @@ const ComponentConvenient= (props)=> {
   return (
     <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
       <span className={"fdjslkadjfksdsjfkdsa"}>{props?.name}</span>
-      <input ref={ref} onChange={setValue} type="checkbox" style={{width: 18, height: 18}} />
+      {
+       !props?.is_detail=== true  && <input ref={ref} onChange={setValue} type="checkbox" style={{width: 18, height: 18}} />
+      }
     </div>
   )
 }
@@ -355,7 +424,8 @@ const Label = (props) => {
           justifyContent: "center",
         }}
       >
-        {props.component}
+        {!props?.is_detail=== true && props.component}
+        {props?.is_detail=== true && props?.value}
       </div>
     </div>
   );
@@ -449,12 +519,61 @@ const ImageIllustation = (props) => {
           background: "#fff",
           height: 400,
           flexWrap: "wrap",
-          borderRadius: 5
+          borderRadius: 5,
+          border: "1px solid #e7e7e7"
         }}
+        
       >
+      {
+            props?.is_detail=== true && props?.imgX.map((item, key) => (
+              <div
+                key={key}
+                className={"dlakjklajwaasas"}
+                style={{
+                  width: "20%",
+                  height: "auto",
+                  aspectRatio: 1 / 1,
+                  padding: 10,
+                  position: "relative",
+                }}
+              >
+                <img
+                  src={item}
+                  alt="open"
+                  style={{
+                    width: "100%",
+                    aspectRatio: 1 / 1,
+                    objectFit: "cover",
+                    border: "1px solid #e7e7e7",
+                  }}
+                />
+                {/* <div
+                  title={"Xóa"}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                  }}
+                  onClick={() =>
+                    props?.setListImage(
+                      props?.listImage.filter(
+                        (img) => parseInt(img.key) !== parseInt(item.key)
+                      )
+                    )
+                  }
+                >
+                  <AiFillCloseCircle style={{ color: "#3a3b3c" }} />
+                </div> */}
+              </div>
+              ))}
+              {/*  */}
         {props?.isChooseImage === true &&
           
           <>
+          
             <>
               {props?.listImage.map((item, key) => (
               <div
@@ -524,55 +643,60 @@ const ImageIllustation = (props) => {
           </>
           }
 
-        {props?.isChooseImage === false && (
-          <div
-            className={"fkdjksjakwjawawas"}
-            style={{
-              width: 80,
-              height: 80,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              position: "absolute",
-              background: "#d9d9d9",
-              cursor: "pointer",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)    ",
-            }}
-          >
+        { !props?.is_detail=== true &&
+          <>
+          
+          {(props?.isChooseImage === false) && (
             <div
-              className={"fjdadjkwljeakwawa"}
+              className={"fkdjksjakwjawawas"}
               style={{
+                width: 80,
+                height: 80,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                marginBottom: 12,
+                flexDirection: "column",
+                position: "absolute",
+                background: "#d9d9d9",
+                cursor: "pointer",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)    ",
               }}
             >
-              <GrAdd style={{ width: 24, height: 24 }} />
+              <div
+                className={"fjdadjkwljeakwawa"}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: 12,
+                }}
+              >
+                <GrAdd style={{ width: 24, height: 24 }} />
+              </div>
+              <div style={{ textAlign: "center", fontWeight: 600, fontSize: 14 }}>
+                Upload
+              </div>
+              <input
+                onChange={f}
+                type="file"
+                multiple
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 9,
+                  cursor: "pointer",
+                  top: 0,
+                  left: 0,
+                }}
+              />
             </div>
-            <div style={{ textAlign: "center", fontWeight: 600, fontSize: 14 }}>
-              Upload
-            </div>
-            <input
-              onChange={f}
-              type="file"
-              multiple
-              style={{
-                position: "absolute",
-                opacity: 0,
-                width: "100%",
-                height: "100%",
-                zIndex: 9,
-                cursor: "pointer",
-                top: 0,
-                left: 0,
-              }}
-            />
-          </div>
-        )}
+          )}
+        </>
+        }
         {/* rule */}
         <div
           className={"djkjaksjkajraeaw"}
@@ -585,7 +709,10 @@ const ImageIllustation = (props) => {
             width: "100%",
           }}
         >
-          Vui lòng đăng tải 5 hình ảnh
+        {
+          !props?.is_detail=== true && 
+          "Vui lòng đăng tải 5 hình ảnh"
+        }
         </div>
       </div>
       <div
@@ -596,8 +723,12 @@ const ImageIllustation = (props) => {
           alignItems: "center",
           marginTop: 16,
         }}
-      >
-        <button
+      > 
+      {
+        !props?.is_detail === true &&
+        <>
+        {
+          props?.is_edit !== true && <button
           onClick={props?.add_hotel_func}
           style={{
             padding: "10px 30px",
@@ -605,7 +736,7 @@ const ImageIllustation = (props) => {
             justifyContent: "center",
             alignItems: "center",
             cursor: "pointer",
-            border: "none",
+            border: "1px solid #e7e7e7",
             outline: "none",
             background: "#2e89ff",
             color: "#fff",
@@ -614,7 +745,36 @@ const ImageIllustation = (props) => {
         >
           Đăng tải
         </button>
+        }
+        {
+          props?.is_edit === true && <button
+          onClick={props?.update_hotel_func}
+          style={{
+            padding: "10px 30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            border: "1px solid #e7e7e7",
+            outline: "none",
+            background: "#2e89ff",
+            color: "#fff",
+            fontWeight: 600,
+          }}
+        >
+          Cập nhật
+        </button>
+        }
+        </>
+      }
       </div>
+      {
+        props?.is_detail === true && 
+        <div className={"dsjdksjskjdkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: 16,gap: 20 }}>
+          <Popup title={"Chấp nhận"} func={props?.approveHotel} />
+          <Popup title={"Từ chối"} func={props?.rejectHotel} />
+        </div>
+      }
     </div>
   );
 };

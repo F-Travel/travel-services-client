@@ -14,7 +14,7 @@ const add_hotel= async (hotel_name, description, address, phone, image, image1, 
         }
     })
     const result= await res.data
-    return setData(result)
+    return result
 }
 
 export default add_hotel

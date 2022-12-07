@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import outstanding_place from '../../api/suggest/outstanding_place'
 import suggest_search from '../../api/search/suggest_search'
 import Fuse from "fuse.js"
+import event_nearly from '../../api/event_nearly'
 
 const Home = (props) => {
   useEffect(()=> {
@@ -228,7 +229,7 @@ const ContainerSuggestOutstanding= (props)=> {
 
   return (
     <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center'}}>
-      <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: 1200, display: "flex", justifyContent: 'center', alignItems: 'center', flexWrap: "wrap", gap: 30, marginTop: 30}}>
+      <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: 1200, display: "flex", justifyContent: 'center', alignItems: 'center', flexWrap: "wrap", gap: 30, marginTop: 30, background :"#fff"}}>
         {/*  */}
         {
           data?.map((item, key)=> <div key={key} onClick={()=> navigate("/booking/search?spec="+ item?.city_name)} className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
@@ -242,11 +243,16 @@ const ContainerSuggestOutstanding= (props)=> {
 }
 
 const NearlyPlace= (props)=> {
+  const navigate= useNavigate()
+  const [data, setData]= useState([])
+  useEffect(()=> {
+    event_nearly(setData)
+  }, [])
   return (
     <div className={"nearly-place-booking-home"} style={{marginTop: 100}}>
       <Title title={"Gợi ý những sự kiện quanh đây"} />
       <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center', marginTop: 30}}>
-        <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: "100%", height: 530, padding: "50px 20px", background: "#D9D9D9"}}>
+        <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: "100%", height: 530, padding: "50px 20px", background: "#fff"}}>
         <Swiper
             modules={[Navigation]}
             className="list-nearly-place-suggest"
@@ -271,7 +277,15 @@ const NearlyPlace= (props)=> {
               }
             }}
           >
-            <SwiperSlide style={{background: "#fff"}}>Slide 1</SwiperSlide>
+            {
+              data?.map((item, key)=> <SwiperSlide key={key} style={{background: "#fff"}}>
+                <div onClick={()=> navigate(`/event/detail/${item?.id}`)} className={"fhsjdhjdjas"} style={{width: "100%", height: "100%", position: "relative", borderRadius: 5}}>
+                  <div className={"fjsdjkfjdkfjdksjdasd"} style={{fontSize: 20, fontWeight: 600, textTransform: "capitalize", padding: 10, position: "relative", zIndex: 222, color: "#fff"}}>{item?.name_activities}</div>
+                  <img alt={""} src={item?.image} className={"fjlsdhjfjkdldssas"} style={{width: '100%', height: "100%", position: "absolute", top: 0, left: 0, objectFit: "cover", borderRadius: 5, background: "#d9d9d9" }} />
+                </div>
+              </SwiperSlide>)
+            }
+            {/* <SwiperSlide style={{background: "#fff"}}>Slide 1</SwiperSlide>
             <SwiperSlide style={{background: "#fff"}}>Slide 2</SwiperSlide>
             <SwiperSlide style={{background: "#fff"}}>Slide 3</SwiperSlide>
             <SwiperSlide style={{background: "#fff"}}>Slide 4</SwiperSlide>
@@ -279,7 +293,7 @@ const NearlyPlace= (props)=> {
             <SwiperSlide style={{background: "#fff"}}>Slide 6</SwiperSlide>
             <SwiperSlide style={{background: "#fff"}}>Slide 7</SwiperSlide>
             <SwiperSlide style={{background: "#fff"}}>Slide 8</SwiperSlide>
-            <SwiperSlide style={{background: "#fff"}}>Slide 9</SwiperSlide>
+            <SwiperSlide style={{background: "#fff"}}>Slide 9</SwiperSlide> */}
           </Swiper>
         </div>
       </div>
@@ -331,12 +345,12 @@ const SuggestHotel= (props)=> {
               }
             }}
           >
-            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/a0/fb/38/a0fb38a030da2a14a39767bfd21d48d2.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 1</SwiperSlide>
-            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/fb/a5/e4/fba5e4299475e36bd03eeefc73f980d1.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 2</SwiperSlide>
-            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/18/ea/f0/18eaf0653a05e534a40243b16e38118a.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 3</SwiperSlide>
-            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/d6/a3/d0/d6a3d059a0bd7b9c159609a4fb94226d.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 4</SwiperSlide>
-            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/ba/f7/40/baf740ffac1f3d942f9ec51a3488c531.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 5</SwiperSlide>
-            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/736x/62/50/7d/62507ddd26f7d22c736eee0f30543fbb.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 6</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/a0/fb/38/a0fb38a030da2a14a39767bfd21d48d2.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Khách sạn thiên hà</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/fb/a5/e4/fba5e4299475e36bd03eeefc73f980d1.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Mường thanh hotel</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/18/ea/f0/18eaf0653a05e534a40243b16e38118a.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Khách sạn luxury</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/d6/a3/d0/d6a3d059a0bd7b9c159609a4fb94226d.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Khách sạn vippro</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/ba/f7/40/baf740ffac1f3d942f9ec51a3488c531.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Khách sạn bình yên</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/736x/62/50/7d/62507ddd26f7d22c736eee0f30543fbb.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Khách sạn bla bla</SwiperSlide>
           </Swiper>
         </div>
       </div>

@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import add_room_hotel from "../../api/auth/manage_hotel/add_room";
 import { uploadImageClient } from "../../firebase/config";
 import InputTemplate from "../Common/InputTemplate";
 import { Title } from "./ListHotel";
@@ -18,14 +20,26 @@ const AddRoomForHotel = (props) => {
 };
 
 const MainAddRoom = (props) => {
+  const [searchParams]= useSearchParams()
   const [listImage, setListImage]= useState([])
   const isChooseImage= listImage?.length> 0 ? true: false
   const [roomName, setRoomName]= useState("")
   const [price, setPrice]= useState()
   const [numberPeople, setNumberPeople]= useState()
   const [roomArea, setRoomArea]=  useState()
-  const [hotelId, setHotelId]= useState()
+  // const [hotelId, setHotelId]= useState()
   const [properties, setProperties]= useState([])
+  // eslint-disable-next-line
+  const [data, setData]= useState()
+  // eslint-disable-next-line
+  const [listUrl, setListUrl]= useState([])
+  const navigate= useNavigate()
+  const add_room= async ()=> {
+      const list_image_un_resole= listImage?.map(item=> uploadImageClient(item.img, setListUrl))
+      const result= await Promise.all(list_image_un_resole)
+      await add_room_hotel(roomName, price, numberPeople, roomArea, result[0], result[1], result[2], result[3], result[4], searchParams.get("idHotel"), properties, setData)
+      navigate("/hotel/detail/"+ searchParams.get("idHotel"))
+    }
   return (
     <div className={"fkdkalskalrwarae"} style={{ width: "100%", padding: 10 }}>
       <div className={"vkdkskadfdsdssd"} style={{ marginBottom: 20 }}>
@@ -38,8 +52,8 @@ const MainAddRoom = (props) => {
       <br /><br />
       <Image listImage={listImage} setListImage={setListImage} isChooseImage={isChooseImage} />
       <br />
-      <BtnCreate />
-    </div>
+      <BtnCreate add_room={add_room} />
+    </div> 
   );
 };
 
@@ -55,72 +69,71 @@ const Tab1 = (props) => {
         flexWrap: "wrap",
       }}
     >
-      <ItemOption width={"calc(100% / 3)"} title={"*Tên phòng"} />
-      <ItemOption width={"calc(100% / 3)"} title={"*Lọai phòng"} />
-      <ItemOption width={"calc(100% / 3)"} title={"*Giá phòng"} />
-      <ItemOption width={"calc(100% / 3)"} title={"*Số lượng giường"} />
-      <ItemOption width={"calc(100% / 3)"} title={"*Diện tích"} />
+      <ItemOption width={"calc(100% / 3)"} title={<span><span style={{color: "red", fontWeight: 600, fontSize: 18}}>*</span>Tên phòng</span>} onChange={props?.setRoomName} />
+      <ItemOption width={"calc(100% / 3)"} title={<span><span style={{color: "red", fontWeight: 600, fontSize: 18}}>*</span>Giá phòng</span>} onChange={props?.setPrice} />
+      <ItemOption width={"calc(100% / 3)"} title={<span><span style={{color: "red", fontWeight: 600, fontSize: 18}}>*</span>Số lượng giường</span>} onChange={props?.setNumberPeople} />
+      <ItemOption width={"calc(100% / 3)"} title={<span><span style={{color: "red", fontWeight: 600, fontSize: 18}}>*</span>Diện tích</span>} onChange={props?.setRoomArea} />
     </div>
   );
 };
 
-const Tab2 = (props) => {
-  return (
-    <div
-      className={"fkjjjasjaskjasj"}
-      style={{ width: "100%", padding: 10, borderTop: "1px solid #000" }}
-    >
-      <TitleItem title={"Tiện nghi và nội quy"} />
-      <div
-        className={"fgjkkdkldskldkla"}
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: 30,
-          flexWrap: "wrap",
-        }}
-      >
-        <ItemOption2 type={"checkbox"} title={"Wifi"} />
-        <ItemOption2 type={"checkbox"} title={"Máy lạnh"} />
-        <ItemOption2 type={"checkbox"} title={"WC"} />
-        <ItemOption2 type={"checkbox"} title={"Chỗ để xe"} />
-      </div>
-      <br />
-      <TitleItem title={"Hướng nhìn"} />
-      <div
-        className={"fgjkkdkldskldkla"}
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: 30,
-          flexWrap: "wrap",
-        }}
-      >
-        <ItemOption2 type={"checkbox"} title={"Núi"} />
-        <ItemOption2 type={"checkbox"} title={"Biển"} />
-        <ItemOption2 type={"checkbox"} title={"Sông"} />
-      </div>
-      <br />
-      <TitleItem title={"Phòng tắm"} />
-      <div
-        className={"fgjkkdkldskldkla"}
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: 30,
-          flexWrap: "wrap",
-        }}
-      >
-        <ItemOption2 title={"Đồ vệ sinh cá nhân"} />
-        <ItemOption2 title={"Dép"} />
-      </div>
-      <br />
-    </div>
-  );
-};
+// const Tab2 = (props) => {
+//   return (
+//     <div
+//       className={"fkjjjasjaskjasj"}
+//       style={{ width: "100%", padding: 10, borderTop: "1px solid #000" }}
+//     >
+//       <TitleItem title={"Tiện nghi và nội quy"} />
+//       <div
+//         className={"fgjkkdkldskldkla"}
+//         style={{
+//           width: "100%",
+//           display: "flex",
+//           alignItems: "center",
+//           gap: 30,
+//           flexWrap: "wrap",
+//         }}
+//       >
+//         <ItemOption2 type={"checkbox"} title={"Wifi"} />
+//         <ItemOption2 type={"checkbox"} title={"Máy lạnh"} />
+//         <ItemOption2 type={"checkbox"} title={"WC"} />
+//         <ItemOption2 type={"checkbox"} title={"Chỗ để xe"} />
+//       </div>
+//       <br />
+//       <TitleItem title={"Hướng nhìn"} />
+//       <div
+//         className={"fgjkkdkldskldkla"}
+//         style={{
+//           width: "100%",
+//           display: "flex",
+//           alignItems: "center",
+//           gap: 30,
+//           flexWrap: "wrap",
+//         }}
+//       >
+//         <ItemOption2 type={"checkbox"} title={"Núi"} />
+//         <ItemOption2 type={"checkbox"} title={"Biển"} />
+//         <ItemOption2 type={"checkbox"} title={"Sông"} />
+//       </div>
+//       <br />
+//       <TitleItem title={"Phòng tắm"} />
+//       <div
+//         className={"fgjkkdkldskldkla"}
+//         style={{
+//           width: "100%",
+//           display: "flex",
+//           alignItems: "center",
+//           gap: 30,
+//           flexWrap: "wrap",
+//         }}
+//       >
+//         <ItemOption2 title={"Đồ vệ sinh cá nhân"} />
+//         <ItemOption2 title={"Dép"} />
+//       </div>
+//       <br />
+//     </div>
+//   );
+// };
 
 export const ItemOption = (props) => {
   return (
@@ -142,16 +155,17 @@ export const ItemOption = (props) => {
       >
         <InputTemplate
           type={props.type}
-          onChange={() => props.onChange}
+          onChange={(e) => props.onChange(e.target.value)}
           value={props.value}
           placeholder={props.placeholder}
           style={{
             width: "100%",
             height: 40,
-            background: "#d9d9d9",
+            background: "#fff",
             padding: 10,
-            border: "none",
+            border: "1px solid #e7e7e7",
             outlineColor: "#2e89ff",
+            borderRadius: 5,
           }}
         />
       </div>
@@ -212,7 +226,7 @@ export const TitleItem = (props) => {
 const BtnCreate = (props) => {
   return (
     <div
-      className={"fkaskldkldklsk"}
+      className={"fkaskldkldklska"}
       style={{
         width: "100%",
         display: "flex",
@@ -222,7 +236,7 @@ const BtnCreate = (props) => {
       }}
     >
       <button
-        className={"mdlkdskldklka"}
+        className={"mdlkdskldklkaa"}
         style={{
           padding: "10px 30px",
           background: "#2e89ff",
@@ -234,6 +248,7 @@ const BtnCreate = (props) => {
           alignItems: "center",
           color: "#fff",
         }}
+        onClick={props?.add_room}
       >
         Lưu
       </button>
@@ -267,18 +282,21 @@ const Image= (props)=> {
     console.log(a);
   };
   return (
-    <div className={"fskjakejakwjaklaww"} style={{ width: "100%" }}>
+    <div className={"fskjakejakwjaklawwa"} style={{ width: "100%" }}>
       <TitleItem title={"Hình ảnh *"} />
       <div
-        className={"fjajkjsklajraewea"}
+        className={"fjajkjsklajraeweaa"}
         style={{
           width: "100%",
           padding: 20,
           display: "flex",
           position: "relative",
-          background: "#d9d9d9",
+          background: "#fff",
           height: 400,
           flexWrap: "wrap",
+          borderRadius: 5,
+          border: "1px solid #e7e7e7"
+          
         }}
       >
         {props?.isChooseImage === true &&
@@ -345,6 +363,8 @@ const Image= (props)=> {
                       cursor: "pointer",
                       top: 0,
                       left: 0,
+                      borderRadius: 5,
+                      border: "1px solid #e7e7e7"
                     }}
                   />
                 </Button></div>
@@ -398,6 +418,8 @@ const Image= (props)=> {
                 cursor: "pointer",
                 top: 0,
                 left: 0,
+                borderRadius: 5,
+                border: "1px solid #e7e7e7"
               }}
             />
           </div>

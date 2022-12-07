@@ -3,7 +3,7 @@ import { Pending } from '../AdminLevel1/AdminLevel1'
 
 const PendingHotel = (props) => {
   return (
-    <Pending data={props?.data} />
+    <Pending data={props?.data} setData={props?.setData} />
   )
 }
 

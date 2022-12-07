@@ -102,9 +102,9 @@ const MainAdminLevel2 = (props) => {
           />
           <Route path={"/manage/room/detail"} element={<ManageRoom />} />
           <Route path={"/hotel/manage/"} element={<Navigate to={"/admin/hotel/manage/verified"} />} />
-          <Route path={"/hotel/manage/verified"} element={<VerfiedHotel data={data} />} />
-          <Route path={"/hotel/manage/pending"} element={<PendingHotel data={data} />} />
-          <Route path={"/hotel/manage/disabled"} element={<DisabledHotel data={data} />} />
+          <Route path={"/hotel/manage/verified"} element={<VerfiedHotel data={data} setData={setData} />} />
+          <Route path={"/hotel/manage/pending"} element={<PendingHotel data={data} setData={setData} />} />
+          <Route path={"/hotel/manage/disabled"} element={<DisabledHotel data={data} setData={setData} />} />
           {/*  */}
           <Route path={"/reported/comment/manage"} element={<ListCommentReport />} />
           <Route path={"/event/manage"} element={<ManageEvent />} />

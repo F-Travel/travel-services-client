@@ -4,7 +4,7 @@ import { SERVER_URL } from "../../config/config"
 
 const get_list_hotel= async (setData)=> {
     const res= await axios({
-        url: SERVER_URL+ "/api/hotel/list-by-ownerId/"+ 2,
+        url: SERVER_URL+ "/api/hotel/list-by-ownerId/"+ Cookies.get("uid"),
         method: "get",
         headers: {
             "authorization": "Bearer "+ Cookies.get("accessToken")

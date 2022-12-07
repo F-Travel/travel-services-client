@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import history_bill from '../../api/auth/user/history_bill'
+import { NumericFormat } from 'react-number-format';
 
 const ListBill = (props) => { 
     const [data, setData]= useState([])
@@ -26,7 +27,7 @@ const ListBill = (props) => {
                     </thead>
                     <tbody className={"fkdjsdjkshfjdhajlsas"} style={{width: "100%"}}>
                         {
-                            data?.map((item, key)=> <ItemListBill key={key} x1={item?.id} x2={item?.status_bill} x3={item?.payment_method} x4={props?.total_amount} x5={"Xem hóa đơn"} />)
+                            data?.map((item, key)=> <ItemListBill key={key} x1={item?.id} x2={item?.status_bill} x3={item?.payment_method} x4={<NumericFormat value= {item?.total_amount} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} />} x5={"Xem hóa đơn"} />)
                         }
                     </tbody>
                 </table>

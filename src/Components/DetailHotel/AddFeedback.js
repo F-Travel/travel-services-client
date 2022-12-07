@@ -58,7 +58,7 @@ const ComponentStar= (props)=> {
 
     return (
         <div onClick={exec} className={"fjdjhjfjjhshnasasa"} style={{display: "flex", justifyContent: "center", alignItems :"center"}}>
-            <AiTwotoneStar color={parseInt(props.star) >= parseInt(props.value) ? "orange" : "#000"} style={{width: 20, height: 20}} />
+            <AiTwotoneStar className={parseInt(props.star) >= parseInt(props.value) ? "active123" : "notactive123"} color={parseInt(props.star) >= parseInt(props.value) ? "orange" : "#000"} style={{width: 20, height: 20}} />
         </div>
     )
 }

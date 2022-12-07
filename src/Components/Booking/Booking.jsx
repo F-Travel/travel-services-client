@@ -13,6 +13,8 @@ import Cookies from 'js-cookie'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 import { Button } from 'react-bootstrap'
+import { NumericFormat } from 'react-number-format';
+
 
 const Booking = () => {
   const location= useLocation()
@@ -64,7 +66,7 @@ const Tab2= (props)=> {
   const {user }= useContext(AppContext)
   const [checkin, setCheckin]= useState(new Date())
   // eslint-disable-next-line
-  const [checkout, setCheckout]= useState(new Date())
+  const [checkout, setCheckout]= useState(null)
   // const [stay, setStay]= useState(0)
   const [openCalendar, setOpenCalendar]= useState(()=> false)
   // eslint-disable-next-line
@@ -81,9 +83,9 @@ const Tab2= (props)=> {
   }, [user])
 
   const booking = async ()=> {
-    const a= await booking_room_hotel(moment(checkin).format("DD/MM/YYYY"), moment(checkout).format("DD/MM/YYYY"), _.sumBy(props?.data, function(o) {return o.amount}), user?.full_name, info.phoneNumber, info.email, Cookies.get("uid"), _.map(props?.data, 'id'), setData)
+    const a= await booking_room_hotel(moment(checkin).format("DD/MM/YYYY"), moment(checkout).format("DD/MM/YYYY"), (parseInt(_.sumBy(props?.data, function(o) {return o.amount})) * parseInt(moment(checkout).diff(moment(checkin), "days"))), user?.full_name, info.phoneNumber, info.email, Cookies.get("uid"), _.map(props?.data, 'id'), setData)
     console.log(a)
-    navigate("/booking/payment", {state: {data: props, booking_id: a, checkin, checkout, info}}) 
+    navigate("/booking/payment", {state: {data: props, booking_id: a, checkin, checkout, info, total_price: (parseInt(_.sumBy(props?.data, function(o) {return o.amount})) * parseInt(moment(checkout).diff(moment(checkin), "days")))}}) 
   }
   return (
     <div className={"tab-2-detail-room-booking-hotel"} style={{width: "100%", display: "flex", justifyContent: 'center', gap: 40, padding: '0 40px'}}>
@@ -95,9 +97,9 @@ const Tab2= (props)=> {
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, position: "relative"}}>
             Ngày vào: {moment(checkin).format("DD/MM/YYYY")} <span title={"Chọn ngày"}><BsFillCalendarDateFill onClick={()=> setOpenCalendar(prev=> !prev)} /></span>
             {
-              openCalendar=== true && <div style={{position: "absolute", top: "100%", left: 0}}>
+              openCalendar=== true && <div style={{position: "absolute", top: "100%", left: 0, width: "max-content"}}>
                 <OutsideClickHandler onOutsideClick={()=> setOpenCalendar(()=> false)}>
-                  <DatePickerPlugin setOpen={setOpenCalendar} startDate={checkin} endDate={checkout} setStartDate={setCheckin} setEndDate={setCheckin} />
+                  <DatePickerPlugin setOpen={setOpenCalendar} startDate={checkin} endDate={checkout} setStartDate={setCheckin} setEndDate={setCheckout} />
                 </OutsideClickHandler>
               </div>
             }
@@ -106,7 +108,7 @@ const Tab2= (props)=> {
             Ngày ra: {moment(checkout).format("DD/MM/YYYY")}
           </div>
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
-            Tổng thời gian lưu trữ: <span className={"dfjhkdjskljdasas "} style={{fontSize: 18}}>1 đêm</span>
+            Tổng thời gian lưu trữ: <span className={"dfjhkdjskljdasas "} style={{fontSize: 18}}><strong>{moment(checkout).diff(moment(checkin), "days")}</strong> đêm</span>
           </div>
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
             Phòng đã chọn: <div className={"dfjhkdjskljdasas "} style={{fontSize: 18, fontWeight: 600}}>
@@ -114,7 +116,7 @@ const Tab2= (props)=> {
             </div>
           </div>
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16}}>
-            Tổng giá: {_.sumBy(props?.data, function(o) {return o.amount})}
+            Tổng giá: <NumericFormat value= {parseInt(_.sumBy(props?.data, function(o) {return o.amount})) * parseInt(moment(checkout).diff(moment(checkin), "days"))} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} /> VND
           </div>
         </div>
       </div>

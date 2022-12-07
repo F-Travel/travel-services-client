@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "react-bootstrap";
+import { NumericFormat } from 'react-number-format';
 
 const DetailSubRoom = (props) => {
   return (
@@ -165,15 +166,15 @@ export const Tab2 = (props) => {
       <div className={"fjkdsjisadkljasdlas"} style={{ width: "50%" }}>
         <div className={"klsadkjsaskdlas"}
           style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
-          Số người ở: {props?.number_people}
+          Số người ở: {props?.number_people} người
         </div>
         <div className={"klsadkjsaskdlas"}
           style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
-          Giá phòng: {props?.price}
+          Giá phòng: <NumericFormat value= {props?.price} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} /> VND
         </div>
         <div className={"klsadkjsaskdlas"}
           style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
-         Diện tích: {props?.room_area}
+         Diện tích: {props?.room_area} m<sup>2</sup>
         </div>
         <br />
         <div
@@ -193,7 +194,7 @@ export const Tab2 = (props) => {
           }}
         >
           {
-            props?.room_type_properties?.map((item, key)=> <div key={key} className={"jskdsjskljkasas"}>{item}</div>)
+            props?.data1?.hotel_properties?.map((item, key)=> <div key={key} style={{width: "calc(100% / 3)"}} className={"jskdsjskljkasas"}>{item?.properties_name}</div>)
           }
         </div>
         <br />

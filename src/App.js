@@ -29,6 +29,8 @@ import LoadingSpinner from "./Loading/LoadingSpinner";
 import ListBill from "./Components/ListBill/ListBill";
 import EventDetail from "./Components/Event/EventDetail";
 import Booking from "./Components/Booking/Booking";
+import PaymentSuccess from "./Components/Payment/PaymentSuccess";
+import RegisterHotel from "./Components/AdminLevel1/RegisterHotel";
 
 export const AppContext = createContext();
 function App() {
@@ -109,6 +111,8 @@ function App() {
               {/* doing */}
               <Route path={"/admin/*"} element={<AdminLevel2 />} />
               <Route path={"/booking/detail"} element={<Booking />} />
+              <Route path={"/payment/success"} element={<PaymentSuccess />} />
+              <Route path={"/check/hotel/:idHotel"} element={<RegisterHotel is_detail={true} />} />
             </>
           )}
           

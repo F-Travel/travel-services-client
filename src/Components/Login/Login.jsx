@@ -26,19 +26,19 @@ const MainLogin= ()=> {
   }
   
   return (
-    <div className={"main-login-main-page"}>
+    <div className={"main-login-main-page"} style={{minHeight: '100vh'}}>
       <div className={"form-main-login-main-page"}>
       <div className={"title-form-main-login-main-page"}>
         Đăng nhập
       </div>
       <div className={"wrap-input-auth-page"}>
-        <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Nhập tên tài khoản"} className={"inp-tml-email"}  />
+        <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Email hoặc sdt"} className={"inp-tml-email"}  />
       </div>
       <div className={"wrap-input-auth-page"}>
         <InputTemplate type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
       </div>
       {
-        message && <div className={"fksdklkdsasaas"} style={{margin: "8px 0"}}>{message}</div>
+        message && <div className={"fksdklkdsasaas"} style={{margin: "8px 0", width: "90%"}}>{message}</div>
       }
       <div className={"wrap-input-auth-page"}>
         <ButtonTemplate className={"btn-tml-login"} disable={false} onClick={()=> login(email, password, setMessgae) }>Đăng nhập</ButtonTemplate>

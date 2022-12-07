@@ -4,7 +4,7 @@ import InputTemplate from '../Common/InputTemplate'
 import GoogleMapPlugin from '../Plugin/GoogleMap'
 import { Title } from '../Profile/Profile'
 import "./DetailHotel.sass"
-
+import {GoLocation}from "react-icons/go"
 import RoomOfHotel, { AmountAll } from './RoomOfHotel'
 import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
@@ -34,7 +34,7 @@ const DetailHotel = (props) => {
             <Tab2 data={data} />
             <br />
             <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
-                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#d9d9d9", height: 68, borderRadius: 5}}></div>
+                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, height: 0, marginBottom: 5}}></div>
                 {
                     data?.room_types?.map((item, key)=> <RoomOfHotel data1={data} data={bookingRoom} setData={setBookingRoom} setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
@@ -73,7 +73,7 @@ const MainDetailHotel1= (props)=> {
             <div className={"main-left"} style={{width: "100%"}}>
                 <div style={{fontSize: 20, fontWeight: 600}}>Tìm</div>
                 <div className="wrap-x--w" style={{width: "100%", display: "flex", flexDirection: "column"}}>
-                    <div className={"main-left-side-search-result"} style={{padding: 10, background: "#0233fe", borderRadius: 5, width: "100%", marginBottom: 6, color: "#fff"}}>
+                    <div className={"main-left-side-search-result"} style={{padding: 10, background: "#A5B8C6", borderRadius: 5, width: "100%", marginBottom: 6, color: "#fff"}}>
                         <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                             <Title title={"Điểm đến"} />
                             <div className={"wrap-option-main-left-side-search-result"} style={{width: "100%", height: 40, background: "#fff"}}>
@@ -119,7 +119,7 @@ const MainDetailHotel1= (props)=> {
                         </div>
                     </div>
                     <div className={"wrap-detail-map-location"} style={{width: "100%", height: 250}}>
-                        <GoogleMapPlugin />
+                        <GoogleMapPlugin {...props} />
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@ const MainHotel2= (props)=> {
                        {props?.data?.hotel_name}
                     </div>
                     <div className={"main-hotel-2-1-1-2"} style={{fontSize: 18}}>
-                        {props?.data?.address}
+                    <GoLocation style={{width: 18, height: 18}} /> {props?.data?.address}
                     </div>
                 </div>
                 <div className={"main-hotel-2-1-2"} style={{width: 200, height: 60}}>
@@ -145,28 +145,28 @@ const MainHotel2= (props)=> {
             </div>
             <div className={"main-hotel-2-2"} style={{width: "100%", marginTop: 16, display: "flex"}}>
                 <div className={"fjdkldsfjdklfjskldjsa"} style={{padding: 5}}>
-                    <div className={"fjkjfkljdjkjbkdssas"} style={{ height: "100%", background: "#d9d9d9", width: 400}}>
+                    <div className={"fjkjfkljdjkjbkdssas"} style={{ height: "100%", background: "#fff", width: 400, border: "1px solid #e7e7e7", borderRadius: 5}}>
                         <img src={props?.data?.image} alt="Can't open" style={{objectFit: "cover",width: 400, height: "100%", aspectRatio: 6 / 5}} />
                     </div>
                 </div>
                 <div className={"main-hotel-2-2-1"} style={{flex: "1 1 0", display: "flex", justifyContent: "space-between", flexWrap: "wrap"}}>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 6 / 5, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#fff", borderRadius: 5, border: "1px solid #e7e7e7"}}>
                             <img src={props?.data?.image1} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 6 / 5, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#fff", borderRadius: 5, border: "1px solid #e7e7e7"}}>
                             <img src={props?.data?.image2} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 6 / 5, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5}}>
                             <img src={props?.data?.image3} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 6 / 5, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5}}>
                             <img src={props?.data?.image4} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
@@ -180,7 +180,7 @@ const Tab2= (props)=> {
     return (
         <div className={"tab-2"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20, gap: 20, padding: "0 40px", marginBottom: 20}}>
             <div className="tab-2-ss" style={{width: "100%", display: "flex", justifyContent: "space-between", paddingBottom: 20, borderBottom: "1px solid #d7d7d7"}}>
-                <div className={"tab-2-1"} style={{width: "calc(100% - 300px)"}}>
+                <div className={"tab-2-1"} style={{width: "calc(100%)"}}>
                     <div style={{fontSize: 18, fontWeight: 600, marginBottom: 12}}>Mô tả khách sạn</div>
                     <div className={"fjkldjdkljkdjkasjas"} style={{marginRight: 10}}>{props?.data?.description}</div>
                 </div>
@@ -207,7 +207,7 @@ const Tab2= (props)=> {
     )
 }
 
-const StatsRoomBooking= (props)=> {
+export const StatsRoomBooking= (props)=> {
     const navigate= useNavigate()
     const toBookingPage= ()=> {
         navigate("/booking/detail", {state: {data: props?.data, data1: props?.data1, state: true}})

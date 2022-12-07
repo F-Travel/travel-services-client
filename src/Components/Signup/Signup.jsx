@@ -23,10 +23,20 @@ const MainSignup= (props)=> {
     const [cpassword, setCPassword]= useState(()=> "")
     const [isManage, setIsManage]= useState(false)
     const [data, setData]= useState()
+    const [role, setRole]= useState(['user'])
     const responseGoogle = (response) => {
         setData(response);
     }
-    
+    const isManageFunc= (e)=> {
+        setIsManage(prev=> !prev)
+        if(isManage=== true) {
+            
+            setRole(["user"])
+        }
+        else {
+            setRole(["mod"])
+        }
+    }
     return (
         <div className={"main-signup-main-page"}>
             <div className={"form-main-signup-main-page"}>
@@ -37,7 +47,7 @@ const MainSignup= (props)=> {
                     <InputTemplate type={"text"} onChange={(e)=> setName(e.target.value)} value={name} placeholder={"Name"} className={"inp-tml-name"}  />
                 </div>
                 <div className={"wrap-input-auth-page"}>
-                    <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Nhận tên tài khoản"} className={"inp-tml-email"}  />
+                    <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Email"} className={"inp-tml-email"}  />
                 </div>
                 <div className={"wrap-input-auth-page"}>
                     <InputTemplate type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
@@ -46,12 +56,12 @@ const MainSignup= (props)=> {
                     <InputTemplate type={"password"} onChange={(e)=> setCPassword(e.target.value)} value={cpassword} placeholder={"Nhập lại mật khẩu"} className={"inp-tml-cpassword"}  />
                 </div>
                 <div style={{justifyContent: "flex-start", width: "90%", maxWidth: 708, display: "flex", alignItems: "center", gap: 10}}>
-                    <input onChange={()=> setIsManage(prev=> !prev)} value={isManage} checked={isManage} type="checkbox" className={"fgjklsfjkldjskdas"} style={{width: 18, height: 18}} />
+                    <input onChange={isManageFunc} value={isManage} checked={isManage} type="checkbox" className={"fgjklsfjkldjskdas"} style={{width: 18, height: 18}} />
                     <span>Bạn là quản lí khách sạn</span>
                 </div>
                 <br />
                 <div className={"wrap-input-auth-page"}>
-                    <ButtonTemplate className={"btn-tml-signup"} disable={false} onClick={()=> signup(name, email,password, setData, navigate) }>Đăng ký</ButtonTemplate>
+                    <ButtonTemplate className={"btn-tml-signup"} disable={false} onClick={()=> signup(name, email,password, setData, role, navigate) }>Đăng ký</ButtonTemplate>
                 </div>
                 <div className={"toggle-to-login"}>
                     Hoặc tiếp tục với

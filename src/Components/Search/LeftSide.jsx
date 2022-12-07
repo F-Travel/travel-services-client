@@ -19,7 +19,8 @@ const LeftSide = (props) => {
             Tìm
         </div>
         <MainLeftSide />
-        <Rating />
+        <Rating {...props} />
+        <FilterSlide {...props} />
     </div>
   )
 }
@@ -38,7 +39,7 @@ const MainLeftSide= (props)=> {
     //     room: searchParams.get("r")
     // }))
     return (
-        <div className={"main-left-side-search-result"} style={{padding: 10, background: "#febb02", width: "100%", marginBottom: 50, borderRadius: 5}}>
+        <div className={"main-left-side-search-result"} style={{padding: 10, background: "#A5B8C6", width: "100%", marginBottom: 50, borderRadius: 5}}>
             <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                 <Title title={"Điểm đến"} />
                 <ReactOutsideClickHandler onOutsideClick={()=> setOpenDestination(()=> false)}>
@@ -78,10 +79,7 @@ const MainLeftSide= (props)=> {
                 </ReactOutsideClickHandler>
             </div> */}
             {/*  */}
-            <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
-                <Title title={"Lựa chọn"} />
-                <MultiRangeSlider onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} min={0} max={5000000} />
-            </div>
+            
             {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                 <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                     <span className={"w-guest-left-side-sp"}>Người lớn</span>
@@ -125,7 +123,7 @@ const Title= (props)=> {
 
 const Rating= (props)=> {
     return (
-        <div className={"rating-booking-hotel"} style={{width: "100%", padding: 10, background: "#febb02", borderRadius: 5}}>
+        <div className={"rating-booking-hotel"} style={{width: "100%", padding: 10, background: "#A5B8C6", borderRadius: 5}}>
             <Title title={"Xếp hạng theo sao"} />
             <div className={"rating-booking-hotel-star-1 rating-booking-hotel-star"} style={{display: "flex", alignItems: "center", gap: 14, marginBottom: 16}}>
                 <div className={"wrap-inp-rating-booking-hotel-star-1"} style={{width: 24, height: 24}}>
@@ -172,6 +170,20 @@ const Rating= (props)=> {
                 </div>
             </div>
             {/*  */}
+        </div>
+    )
+}
+
+const FilterSlide= (props)=> {
+    return (
+        <div className={"djskjskkjdksfjkdss"} style={{width: "100%", marginTop: 20, background: "#A5B8C6", borderRadius: 5}}>
+            <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20, padding: "10px 10px 20px 10px"}}>
+                <Title title={"Lựa chọn"} />
+                <MultiRangeSlider onChange={({ min, max }) => {
+                    props?.setMinValue(min)
+                    props?.setMaxValue(max)
+                }} min={0} max={5000000} />
+            </div>
         </div>
     )
 }

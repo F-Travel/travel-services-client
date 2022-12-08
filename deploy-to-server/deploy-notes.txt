@@ -1,0 +1,47 @@
+azureuser
+20.89.89.207
+f-travel.japaneast.cloudapp.azure.com
+
+sudo apt update
+
+install nginx
+
+sudo apt install nginx -y 
+
+install JDK 8 
+
+https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-20-04
+
+sudo apt install openjdk-8-jre-headless -y 
+
+(-y : cai` luon ko hoi lai) 
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'abc123';
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+
+dung` quyen sudo khoi chay phan` mem nano de edit cai file o duong dan /etc/mysql/mysql.conf.d/mysqld.cnf
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-allow-remote-access-to-mysql
+https://stackoverflow.com/questions/16287559/mysql-adding-user-for-remote-access
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
+
+
+default msyql chặn kết nối từ bên ngoài , phải định danh bằng từng host 
+cấp mọi quyền trên db cho user có tên là "root" ở tất cả host vói password là abc123 
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'abc123';
+
+
+GRANT ALL ON *.* TO 'root'@'localhost';
+GRANT ALL ON *.* TO 'root'@'%';
+FLUSH PRIVILEGES;
+
+
+

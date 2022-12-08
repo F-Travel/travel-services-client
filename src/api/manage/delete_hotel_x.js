@@ -6,7 +6,7 @@ const delete_hotel_x= async (idHotel, setData, setLoading)=> {
     setLoading(true)
     const res= await axios({
         url: SERVER_URL+ "/api/hotel/delete/"+ idHotel,
-        method: "put",
+        method: "delete",
         headers: {
             "authorization": "Bearer " + Cookies.get("accessToken")
         }

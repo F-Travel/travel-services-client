@@ -10,7 +10,7 @@ const add_hotel= async (hotel_name, description, address, phone, image, image1, 
             "authorization": "Bearer "+ Cookies.get("accessToken")
         },
         data: {
-            hotel_name, description, address, phone, image, image1, image2, image3, image4, city_id, latitude, longitude: longtitude, check_in_time, check_out_time, is_payment_card: is_payment_card=== true ? "1" : "0", owner_id, hotel_properties
+            hotel_name, description, address, phone, image, image1, image2, image3, image4, city_id, latitude: latitude?.toString(), longitude: longtitude?.toString(), check_in_time, check_out_time, is_payment_card: is_payment_card=== true ? "1" : "0", owner_id, hotel_properties
         }
     })
     const result= await res.data

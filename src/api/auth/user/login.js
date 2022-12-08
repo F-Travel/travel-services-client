@@ -12,7 +12,14 @@ const login= async (account, password, setData)=> {
             }
         })
         const result= await res.data
-        if(result?.accessToken?.length > 0) {
+        console.log(result)
+        if(result?.roles?.[0]=== "ROLE_ADMIN") {
+            Cookies.set("accessToken", result.accessToken)
+            Cookies.set("uid", result.id)
+            setData("Đăng nhập thành công")
+            return window.location.href= window.location.origin+ "/admin"
+        }
+        else if(result?.accessToken?.length > 0) {
             Cookies.set("accessToken", result.accessToken)
             Cookies.set("uid", result.id)
             setData("Đăng nhập thành công")

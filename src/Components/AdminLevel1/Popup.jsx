@@ -38,14 +38,15 @@ export default function Popup(props) {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+        
       >
-        <DialogTitle>{"Thông báo"}</DialogTitle>
-        <DialogContent>
+        <DialogTitle style={{width: 600}}>{"Thông báo"}</DialogTitle>
+        <DialogContent style={{width: 600}}>
           <DialogContentText id="alert-dialog-slide-description">
             Thao tác thành công
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{width: 600, justifyContent: "center", alignItems: "center"}}> 
           <Button onClick={()=> {
             handleClose()
             navigate("/admin")

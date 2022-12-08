@@ -58,8 +58,8 @@ const Navigation = (props) => {
           text={"Quản lý khách sạn"}
           array_link={[
             { link: "/manage/hotel/general", text: "Danh sách khách sạn" },
-            { link: "/manage/hotel/add/new/hotel", text: "Đăng ký thêm khách sạn" },
-            { link: "/manage/hotel/manage/edit/hotel", text: "Chỉnh sửa thông tin khách sạn" },
+            { link: "/manage/hotel/add-new", text: "Đăng ký thêm khách sạn" },
+            { link: "/manage/hotel/edit", text: "Chỉnh sửa thông tin khách sạn" },
           ]}
           linkLv1={"/manage/hotel/general"}
         /> */}
@@ -69,11 +69,11 @@ const Navigation = (props) => {
       />
       <NavigationHeritage
         text={"Thêm khách sạn"}
-        link={"/manage/hotel/add/new/hotel"}
+        link={"/manage/hotel/add-new"}
       />
       <NavigationHeritage
         text={"Chỉnh sửa khách sạn"}
-        link={"/manage/hotel/manage/edit/hotel"}
+        link={"/manage/hotel/edit"}
       />
       <NavigationHeritage
         text={"Yêu cầu đặt phòng"}
@@ -118,7 +118,7 @@ const Main = (props) => {
             element={<Navigate to={"/manage/hotel/general"} />}
           />
           <Route path={"/hotel/general"} element={<ListHotel />} />
-          <Route path={"/hotel/add/new/hotel"} element={<RegisterHotel />} />
+          <Route path={"/hotel/add-new"} element={<RegisterHotel />} />
           <Route path={"/hotel/add/new/room"} element={<AddRoomForHotel />} />
           <Route path={"/hotel/list/disabled/*"} element={<Disable />} />
           <Route path={"/comment/reports/*"} element={<CommentsReport />} />
@@ -127,7 +127,7 @@ const Main = (props) => {
           <Route path={"/request/booking"} element={<RequestBookingRoom />} />
           <Route path={"/history/booking"} element={<HistoryBooking />} />
           <Route
-            path={"/hotel/manage/edit/hotel"}
+            path={"/hotel/edit"}
             element={<RegisterHotel is_edit={true} />}
           />
           <Route

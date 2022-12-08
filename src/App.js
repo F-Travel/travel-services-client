@@ -112,7 +112,11 @@ function App() {
               <Route path={"/admin/*"} element={<AdminLevel2 />} />
               <Route path={"/booking/detail"} element={<Booking />} />
               <Route path={"/payment/success"} element={<PaymentSuccess />} />
-              <Route path={"/check/hotel/:idHotel"} element={<RegisterHotel is_detail={true} />} />
+              <Route path={"/check/hotel/:idHotel"} element={<div style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <div style={{width: "100%", maxWidth: 1116, display: "flex", justifyContent: "center", alignItems: "center"}}>
+                  <RegisterHotel is_detail={true} />
+                </div>
+              </div>} />
             </>
           )}
           

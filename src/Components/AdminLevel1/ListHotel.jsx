@@ -130,10 +130,10 @@ const Main= (props)=> {
                     <Pagination2 setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(props?.data?.length) / 5)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
                     {/* {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Xóa khách sạn thành công !"}/>} */}
                     {
-                        openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> edit_hotel(bookingId, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />
+                        openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> edit_hotel(bookingId, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} messageSnackbar={""} content={"Bạn có muốn chỉnh sửa khách sạn này ?"} />
                     }
                     {
-                        openConfirm2=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> deleteHotel(bookingId)} open={openConfirm2} setOpen={setOpenConfirm2} title={"Thông báo"} content={"Bạn xác nhận sẽ từ chối khách sạn này ?"} />
+                        openConfirm2=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> deleteHotel(bookingId)} open={openConfirm2} setOpen={setOpenConfirm2} title={"Thông báo"} messageSnackbar={"Đã xóa khách sạn thành công"} content={"Bạn có muốn xóa khách sạn này ?"} />
                     }
                     {
                         openSnackbar=== true && <PopupSnackBar open={openSnackbar} setOpen={setOpenSnackbar} alert={messageSnackbar} />
